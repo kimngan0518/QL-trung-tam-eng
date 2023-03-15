@@ -1,0 +1,97 @@
+﻿@{
+
+    ViewData["Title"] = "Thong ke thi sinh";
+}
+@model WEB.Models.ThongKeModel;
+<h1 class="text-center">Thống kê thí sinh</h1>
+<div class="row">
+
+    <!------------ Bảng input------------------>
+    <div class="col col-xl-1 pt-xl-5"></div>
+    <div class="col col-lg-3 pt-xl-5">
+        <div class="card">
+            <form method="get" class="card-body">
+                <div class="row">
+
+                    <div class="form-group col-xl-12">
+                        <label><b>Trình độ</b></label>
+                        <br />
+                        <select class="form-control" data-selected-text-format="value" id="tentrinhdo"
+                                asp-for="tenTrinhDoTK"
+                                asp-items=@(new SelectList(ViewBag.DSTrinhDo,"tenTrinhDo","tenTrinhDo"))>
+                            <option value="null">Nothing selected</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-xl-12 text-center">
+                        <button class="btn btn-lg btn-block btn-primary" type="submit" style="color:aliceblue;">
+                            Tìm kiếm
+                        </button>
+                    </div>
+
+                    <div class="form-group col-xl-12">
+                        <br />
+                        <label><b>Số lượng thí sinh</b></label>
+                        <br />
+                        <input type="text" readonly="readonly" class="selectpicker form-select form-control"
+                               value="@Model.kq_TK_thisinh.Select(x => x.ID).Count().ToString()">
+
+                    </div>
+
+                    <div class="col-xl-12 text-center">
+                        <button class="btn btn-lg btn-block btn-primary" type="submit" style="color:aliceblue;"
+                                onclick="document.getElementById('tentrinhdo').value = '';">
+                            Làm mới
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+    <!------------ Bảng kết quả------------------>
+    <div class="col col-xl-7 pt-xl-5">
+        <h2></h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead bg-success text-center" style="color:aliceblue;">
+                <tr>
+                    <th>CCCD</th>
+                    <th>Họ tên</th>
+                    <th>Giới tính</th>
+                    <th>SĐT</th>
+                    <th>Trình độ</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var ketqua in Model.kq_TK_thisinh)
+                {
+
+                    <tr>
+                        <td>@ketqua.ID</td>
+                        <td>@ketqua.hoTen</td>
+                        <td>@ketqua.gioiTrinh</td>
+                        <td>@ketqua.sdt</td>
+                        <td>@ketqua.tenTrinhDo</td>
+
+                    </tr>
+
+                }
+            </tbody>
+
+
+
+        </table>
+
+
+    </div>
+
+
+
+</div>

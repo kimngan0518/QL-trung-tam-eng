@@ -1,0 +1,98 @@
+﻿@{
+
+    ViewData["Title"] = "Giấy chứng nhận";
+}
+
+@model WEB.Models.TraCuuModel;
+
+<h1 class="text-center">XEM GIẤY CHỨNG NHẬN</h1>
+<div class="row">
+
+    <!------------ Bảng input------------------>
+    <div class="col col-xl-1 pt-xl-5"></div>
+    <div class="col col-lg-3 pt-xl-5">
+        <div class="card">
+            <form method="get" class="card-body">
+                <div class="row">
+
+                    <div class="form-group col-xl-12">
+                        <label><b>KHÓA THI</b></label>
+                        <br />
+                        <select class="selectpicker form-select form-control" asp-for="makhoathi"
+                                asp-items=@(new SelectList(ViewBag.DSKhoathi,"maKhoaThi","tenKhoaThi"))>
+                            <item value=null>------------</item>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label><b>SỐ BÁO DANH</b></label>
+                        <br />
+                        <input class="form-control" asp-for="sbd" placeholder="Số báo danh" />
+                    </div>
+                    <div class="col-xl-12 text-center">
+                        <button class="btn btn-lg btn-block btn-primary" type="submit" id="btnTraCuu" style="color:aliceblue;">
+                            TÌM KIẾM
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+    <!------------ Bảng kết quả------------------>
+    <div class="col col-xl-7 pt-xl-5">
+        <h2></h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead bg-success text-center" style="color:aliceblue;">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Khóa thi</th>
+                    <th>Phòng thi</th>
+                    <th>SBD</th>
+                    <th>Nghe</th>
+                    <th>Nói</th>
+                    <th>Đọc</th>
+                    <th>Viết</th>
+                    <th>Chi tiết</th>
+                </tr>
+            </thead>
+            @if (Model.listKetQuaTraCuu != null)
+            {
+                <tbody>
+
+                    @foreach (var ketqua in Model.listKetQuaTraCuu)
+                    {
+
+                        <tr>
+                            <td>@ketqua.hoten</td>
+                            <td>@ketqua.tenkhoathi</td>
+                            <td>@ketqua.tenphongthi</td>
+                            <td>@ketqua.sbd</td>
+                            <td>@ketqua.diemnghe</td>
+                            <td>@ketqua.diemnoi</td>
+                            <td>@ketqua.diemdoc</td>
+                            <td>@ketqua.diemviet</td>
+                            <td>
+                                <button class="btn btn-lg btn-block btn-primary">
+                                    Xem
+                                </button>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            }
+
+
+        </table>
+
+
+    </div>
+
+
+
+</div>

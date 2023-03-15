@@ -1,0 +1,83 @@
+﻿@{
+
+    ViewData["Title"] = "Tra cuu thong tin";
+}
+
+@model WEB.Models.TraCuuModel;
+
+<h1 class="text-center">TRA CỨU THÔNG TIN THÍ SINH</h1>
+<div class="row">
+
+    <!------------ Bảng bên trái------------------>
+    <div class="col col-xl-1 pt-xl-5"></div>
+    <div class="col col-xl-3 pt-xl-5">
+        <div class="card">
+            <form method="get" class="card-body">
+                <div class="row">
+                    <div class="form-group col-xl-12">
+                        <label><b>TÊN</b></label>
+                        <br />
+                        <input class="form-control" name="hoten" placeholder="Họ tên thí sinh" />
+                    </div>
+                    <div class="form-group col-xl-12">
+                        <label><b>SỐ ĐIỆN THOẠI</b></label>
+                        <br />
+                        <input class="form-control" name="sdt" placeholder="Số điện thoại" />
+                    </div>
+                    <div class="col-xl-12 text-center">
+                        <button class="btn btn-lg btn-block btn-primary" type="submit" id="btnTraCuu" style="color:aliceblue;">
+                            TÌM KIẾM
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+
+    <!------------ Bảng bên phải------------------>
+    <div class="col col-xl-7 pt-xl-5">
+        <h2></h2>
+        <table class="table table-bordered table-striped">
+            <thead class="thead bg-success text-center" style="color:aliceblue;">
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Khóa thi</th>
+                    <th>Phòng thi</th>
+                    <th>SBD</th>
+                    <th>Nghe</th>
+                    <th>Nói</th>
+                    <th>Đọc</th>
+                    <th>Viết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ketqua in Model.listKetQuaTraCuu)
+                {
+
+                    <tr>
+                        <td>@ketqua.hoten</td>
+                        <td>@ketqua.tenkhoathi</td>
+                        <td>@ketqua.tenphongthi</td>
+                        <td>@ketqua.sbd</td>
+                        <td>@ketqua.diemnghe</td>
+                        <td>@ketqua.diemnoi</td>
+                        <td>@ketqua.diemdoc</td>
+                        <td>@ketqua.diemviet</td>
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+
+
+    </div>
+
+
+
+</div>
+

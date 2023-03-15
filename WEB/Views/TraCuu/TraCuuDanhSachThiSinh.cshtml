@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model WEB.Models.TraCuuModel;
+
+<h1 class="text-center">TRA CỨU DANH SÁCH THÍ SINH THEO PHÒNG THI</h1> 
+<div class="row">
+    <div class="col col-xl-1 pt-xl-5"></div>
+    <div class="col col-xl-3 pt-xl-5">
+        <div class="card">
+            <form class="card-body" method="get">
+                <div class="row">
+                    <div class="col-xl-12 form-group">
+                        <label><p>Khóa thi</p></label>
+                        <select id="makt" class="selectpicker form-select form-control" asp-for="makhoathi"
+                                asp-items=@(new SelectList(ViewBag.khoaThis,"maKhoaThi","tenKhoaThi"))>
+                        </select>
+                    </div>
+                    <div class="col-xl-12 form-group">
+                        <label><p>Phòng Thi</p></label>
+                        <select id="phong" class="selectpicker form-select form-control" asp-for="maPhong"
+                                asp-items=@(new SelectList(ViewBag.phongThis, "maPhong", "tenPhong"))>
+                        </select>
+                    </div>
+                    <div class="col-xl-12 form-group">
+                        <button class="btn btn-lg btn-block btn-primary" type="submit" id="btnTraCuu" style="color:aliceblue;">
+                            Tìm Kiếm
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col col-xl-7 pt-xl-5">
+        <table class="table table-bordered table-striped">
+            <thead class="thead bg-success text-center" style="color:aliceblue;">
+                <tr>
+                    <th>Họ Tên</th>
+                    <th>Giới Tính</th>
+                    <th>Ngày Sinh</th>
+                    <th>Nơi Sinh</th>
+                    <th>Trình Độ</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ketqua in Model.thiSinhByPhongs)
+                {
+                    <tr>
+                        <td>@ketqua.hoten</td>
+                        @if (ketqua.gioitinh == true)
+                        {
+                            <td>Nữ</td>
+                        }
+                        else
+                        {
+                            <td>Nam</td>
+                        }
+                        <td>@ketqua.ngaysinh</td>
+                        <td>@ketqua.noisinh</td>
+                        <td>@ketqua.trinhdo</td>
+                        <td style="width:fit-content;">
+                            <a href='@Url.Action("tracuuThongTin", "TraCuu",new { hoten = ketqua.hoten, sdt = ketqua.sdt})'>
+                                <input type='button' class="edit btn btn-xl btn-primary" value='Thông tin' />
+                            </a>
+                            <a href="@Url.Action("xemGiayChungNhan", "TraCuu", new { sbd = ketqua.sbd, maKhoaThi = ketqua.maKT})">
+                                <input id="edit" asp-action="Update" type='button' class="edit btn btn-xl btn-primary" style="color:white" value='Giấy Chứng Nhận' />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
